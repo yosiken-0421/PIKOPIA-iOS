@@ -1,0 +1,53 @@
+# PIKOPIA: upload an internal-only beta to TestFlight.
+# Before running: create the Apple App ID + App Store Connect app record,
+# add the correct distribution certificate/provisioning profile to Codemagic,
+# and create a protected 'pikopia-apple' environment variable group with
+# ASC_KEY_ALIAS set to the existing Apple Developer Portal integration key name.
+workflows:
+  pikopia-testflight-internal:
+    name: PIKOPIA - TestFlight internal beta
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    integrations:
+      app_store_connect: "$ASC_KEY_ALIAS"
+    environment:
+      groups:
+        - pikopia-apple
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.yosiken0421.pikopia
+      xcode: "26.6"
+    scripts:
+      - name: Generate Xcode project
+        script: |
+          set -eu
+          if ! command -v xcodegen >/dev/null 2>&1; then brew install xcodegen; fi
+          python3 - <<'PY'
+          from pathlib import Path
+          import os
+          p = Path('ios-native/project.yml')
+          new_build = int(os.environ.get('PROJECT_BUILD_NUMBER', '1'))
+          p.write_text(p.read_text().replace('CURRENT_PROJECT_VERSION: "1"', f'CURRENT_PROJECT_VERSION: "{new_build}"'))
+          PY
+          cd ios-native
+          xcodegen generate --spec project.yml
+          test -d PIKOPIA.xcodeproj
+      - name: Apply App Store distribution signing
+        script: |
+          set -eu
+          cd ios-native
+          xcode-project use-profiles --custom-export-options='{"testFlightInternalTestingOnly": true}'
+      - name: Build signed IPA
+        script: |
+          set -eu
+          cd ios-native
+          xcode-project build-ipa --project PIKOPIA.xcodeproj --scheme PIKOPIA
+    artifacts:
+      - ios-native/build/ios/ipa/*.ipa
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: false
+        submit_to_app_store: false

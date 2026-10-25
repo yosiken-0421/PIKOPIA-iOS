@@ -1,0 +1,21 @@
+✔ all six games start and finish at every difficulty with bounded scores (33.332858ms)
+✔ beat locks after five catches during result delay (2.058344ms)
+✔ ten correct stars finish and cannot earn additional hits (2.616881ms)
+✔ number ordering produces a perfect score (2.753045ms)
+✔ memory playback accepts correct sequence at all difficulties (4.5379ms)
+✔ color game locks after ten answers (2.225104ms)
+✔ random mode selects distinct games and persists final results (5.522265ms)
+✔ two-player handover retains same seeded game layout and finishes (2.574728ms)
+✔ ranking uses score per game, including mixed game counts (1.18119ms)
+✔ quitting and backgrounding cancel delayed game callbacks (1.614969ms)
+✔ native resources match canonical source and optional online is disabled (0.422723ms)
+✔ second player name dialog accepts and cancels inside the web app (1.441129ms)
+✔ ranking deletion dialog preserves cancellation and applies confirmation (4.494085ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 143.07507

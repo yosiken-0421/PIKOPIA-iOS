@@ -1,0 +1,33 @@
+name: PIKOPIA signed TestFlight upload
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pikopia-testflight
+  cancel-in-progress: false
+jobs:
+  testflight:
+    runs-on: macos-26
+    timeout-minutes: 30
+    environment: pikopia-testflight
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Game regression tests
+        run: node --test tests/*.test.cjs
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Archive and upload only PIKOPIA
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          IOS_DISTRIBUTION_P12_BASE64: ${{ secrets.IOS_DISTRIBUTION_P12_BASE64 }}
+          IOS_DISTRIBUTION_P12_PASSWORD: ${{ secrets.IOS_DISTRIBUTION_P12_PASSWORD }}
+          IOS_PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE_BASE64 }}
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: bash ios-native/scripts/ci-testflight.sh
