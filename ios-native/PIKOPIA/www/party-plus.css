@@ -1,0 +1,23 @@
+/* PIKOPIA v0.3 — joyful, readable, touch-safe character play */
+.party-daily{background:linear-gradient(112deg,#5553a9,#8566c9)!important;color:#fff!important;border:2px solid #fff9!important}
+.party-daily .mode-text small,.party-daily .mode-text span,.party-daily .chevron{color:#faf2ff!important}
+.party-book{display:flex;align-items:center;gap:13px;margin:22px 0 32px;padding:17px 18px;border:2px solid #f1d8a4;border-radius:24px;background:linear-gradient(130deg,#fff9e7,#e9e4ff);box-shadow:0 7px 0 #d5cbe18a;color:#43365f}
+.book-emblem{flex:none;width:56px;height:56px;display:grid;place-items:center;background:#fff9b6;border:3px solid #fff;border-radius:50%;font-size:30px;box-shadow:0 6px 12px #6a527b28}
+.party-book small{font-size:10px;letter-spacing:2px;font-weight:900;color:#8363ae}
+.party-book h3{margin:3px 0;font-size:19px}
+.party-book p{margin:3px 0;line-height:1.5;font-size:12px}.party-book strong{color:#7650bb}
+.party-mission{display:grid;gap:5px;text-align:center;padding:13px 15px;margin:10px auto 14px;background:#fff8dc;border:2px dashed #ddbd68;border-radius:18px;max-width:340px;color:#664c3f}.party-mission span{font-size:11px;font-weight:900}.party-mission strong{font-size:15px}.party-mission small{font-size:11px}
+.party-ability{display:flex;align-items:center;gap:9px;margin:9px 0;padding:10px 11px;border:2px solid #dacaff;border-radius:18px;background:linear-gradient(110deg,#fffaf2,#ede6ff);box-shadow:0 5px 15px #59458d1c;color:#503768}
+.party-ability.party-active{background:#fff3c6;border-color:#eabb70}
+.party-ability .friend-portrait{width:45px;height:45px;min-width:45px}
+.party-ability>div{flex:1;min-width:0}.party-ability b{display:block;font-size:12px;line-height:1.3}.party-ability small{display:block;margin-top:3px;color:#745f87;font-size:10px;line-height:1.4}
+.party-ability button{padding:11px 10px;min-width:67px;min-height:43px;border:0;border-radius:14px;background:#ffd16c;color:#5c3882;font-size:12px;font-weight:900}
+.party-ability button:disabled{color:#6a6384;background:#dcd3ef}
+.party-mission-result,.party-daily-summary{display:grid;gap:5px;text-align:center;padding:12px 13px;margin:13px auto;border:2px solid #dccdeb;border-radius:17px;background:#f1edff;max-width:330px;color:#5b477a}
+.party-mission-result.cleared{background:#fff4cb;border-color:#eccf72;color:#6a501a}
+.party-mission-result strong,.party-daily-summary strong{font-size:15px}.party-mission-result small,.party-daily-summary small{font-size:11px}
+.party-daily-summary{background:#eaf6ff;border-color:#b9d9fa}.party-daily-summary span{font-size:17px;font-weight:900}
+.party-duel{display:grid;gap:4px;text-align:center;padding:16px;margin:12px auto;border:2px solid #d5c8f1;border-radius:20px;background:#f2eaff;color:#594584}
+.party-duel strong{font-size:29px}.party-duel small{font-size:11px}.party-round-score.party-a-wins{border-left:5px solid #66c7ac}.party-round-score.party-b-wins{border-right:5px solid #f3a1b9}
+@media(max-width:370px){.party-book{gap:8px;padding:12px}.party-ability{padding:8px}.party-ability b{font-size:11px}.party-ability button{min-width:60px;padding:9px 6px}}
+@media(prefers-reduced-motion:reduce){.party-ability,.party-book{transition:none!important}}
