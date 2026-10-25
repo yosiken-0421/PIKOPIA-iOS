@@ -6,12 +6,14 @@
   <meta name="theme-color" content="#18162c" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="description" content="PIKOPIA — 6種類のオリジナルミニゲームが楽しめる、みんなのゲームパーティー。" />
+  <meta name="description" content="PIKOPIA — 10種類のオリジナルミニゲームが楽しめる、みんなのゲームパーティー。" />
   <link rel="manifest" href="./manifest.webmanifest" />
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
   <link rel="apple-touch-icon" href="./assets/icon-192.png" />
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./friends.css" />
+  <link rel="stylesheet" href="./arcade.css" />
+  <link rel="stylesheet" href="./maze.css" />
   <title>PIKOPIA | ミニゲームパーティー</title>
 </head>
 <body>
@@ -47,12 +49,12 @@
             </svg>
             <span class="mascot-label">ピコ ✨</span>
           </div>
-          <div class="hero-bottom"><span>✧ 6 ORIGINAL MINI GAMES</span><span>LET'S PLAY!</span></div>
+          <div class="hero-bottom"><span>✧ 10 ORIGINAL MINI GAMES</span><span>LET'S PLAY!</span></div>
         </div>
         <div class="setting-panel"><div class="setting-head"><div><span class="section-kicker">PLAY SETTINGS</span><h2>あそぶ準備</h2></div><span class="setting-note">いつでも変更OK</span></div>
           <label class="field-label" for="playerName">プレイヤー名</label><input id="playerName" maxlength="14" placeholder="あなたの名前" autocomplete="off" value="プレイヤー1" />
           <div class="field-label top-space">難易度</div><div class="pill-row" id="difficultyPills"><button data-diff="easy" class="pill">🌱 やさしい</button><button data-diff="normal" class="pill selected">⭐ ふつう</button><button data-diff="hard" class="pill">🔥 チャレンジ</button></div>
-          <div class="field-label top-space">ランダムで選ぶゲーム数</div><div class="pill-row" id="countPills"><button data-count="3" class="pill">3つ</button><button data-count="5" class="pill selected">5つ</button><button data-count="6" class="pill">ぜんぶ6つ</button></div>
+          <div class="field-label top-space">ランダムで選ぶゲーム数</div><div class="pill-row" id="countPills"><button data-count="3" class="pill">3つ</button><button data-count="5" class="pill selected">5つ</button><button data-count="10" class="pill">ぜんぶ10こ</button></div>
         </div>
         <div class="section-title"><div><span class="section-kicker">CHOOSE YOUR MODE</span><h2>どれで遊ぶ？</h2></div></div>
         <div class="mode-stack">
@@ -60,14 +62,14 @@
           <button id="duoBtn" class="mode-card mode-duo"><span class="mode-glyph">🫶</span><span class="mode-text"><small>ふたりでワイワイ</small><strong>同じスマホで対決</strong><span>順番に遊んで合計点勝負</span></span><span class="chevron">↗</span></button>
           <button disabled aria-disabled="true" id="onlineBtn" class="mode-card mode-online"><span class="mode-glyph">🌐</span><span class="mode-text"><small>今後のアップデートで対応予定</small><strong>オンライン対戦</strong><span id="onlineTagline">今回の試遊版では利用できません</span></span><span class="chevron">↗</span></button>
         </div>
-        <div class="section-title compact"><div><span class="section-kicker">MINI GAMES</span><h2>ゲームを選んで練習</h2></div><span class="counter-chip">全6種類</span></div>
+        <div class="section-title compact"><div><span class="section-kicker">MINI GAMES</span><h2>ゲームを選んで練習</h2></div><span class="counter-chip">全10種類</span></div>
         <div id="gameGrid" class="game-grid"></div>
         <section class="world-feature" aria-label="オリジナルキャラクターの世界観イラスト">
           <div class="world-feature-header"><span class="section-kicker">MEET OUR FRIENDS</span><h2>ピコたちの、あそびの星へ ✨</h2><p>ピコ・ミント・モヤと、ワクワクいっぱいの冒険。</p></div>
           <div class="world-image-wrap"><img src="./assets/pikopia-world.webp" alt="カラフルな星の遊園地で、ピコと友だちが空を飛ぶオリジナルアート" loading="lazy" /></div>
         </section>
         <div class="bottom-menu"><button id="rankingBtn" class="bottom-menu-btn">🏆 <span>ローカルランキング</span> →</button></div>
-        <div class="footnote">オリジナルキャラクター・音楽・ゲームデザイン。<br>試遊版 0.1.1：6種類のゲーム・同じ端末での2人対戦・端末内ランキングに対応。</div>
+        <div class="footnote">オリジナルキャラクター・音楽・ゲームデザイン。<br>試遊版 0.2.0：10種類のゲーム・同じ端末での2人対戦・端末内ランキングに対応。</div>
       </section>
       <section id="view-play" class="view"><div class="play-head"><button class="back-button" id="quitBtn">‹ 終了</button><div class="round-info" id="roundInfo">ROUND 1 / 5</div><span class="score-label" id="scoreInfo">0 PTS</span></div><div id="playBody"></div></section>
       <section id="view-ranking" class="view"><button class="back-button back-dark" id="rankingBack">‹ ホームに戻る</button><div class="inside-title"><span class="section-kicker">HALL OF FAME</span><h2>🏆 ローカルランキング</h2><p>この端末に保存された記録です。オンラインランキングとは別です。</p></div><div id="rankingList"></div><button class="outline-btn" id="clearRanking">記録をすべて消す</button></section>
@@ -77,6 +79,8 @@
   </div>
   <audio id="bgm" preload="auto" loop src="./assets/bgm-pikopia.wav"></audio>
   <script src="./app.js" defer></script>
+  <script src="./arcade.js" defer></script>
+  <script src="./maze.js" defer></script>
   <script src="./friends.js" defer></script>
 </body>
 </html>
