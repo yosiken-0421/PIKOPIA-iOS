@@ -26,12 +26,15 @@
 - GitHub連携のユーザーは yosiken-0421。取得したリポジトリ一覧にPIKOPIA専用はない。
 - ユーザーがPIKOPIA-iOSを作成。GitHub APIで非公開・管理権限・main初期コミットを確認。
 - 専用リポジトリ: https://github.com/yosiken-0421/PIKOPIA-iOS
+- mainへ44ファイルを保存し、コミット18a41eaf5aa8c77e11f2ba1dff0bbf4299bfb12fとツリーをAPIで検証。
+- Codemagicの既存連携設定はAtodeYaruBox-iOSに存在。現在の作業用Codemagicブラウザーはログイン待ち。
+- Apple Developerは証明書一覧へ移動した時点でセッション期限切れ。再ログインが必要な場合は本人操作で行う。
 - 費用枠を確認するまでActionsは手動実行のみ。
 - GitHubへのGoogle認証利用とApple再試行はユーザーが「両方許可」と明示許可済み。再確認不要。
 - 既存AtodeYaruBox-iOSの現行ios.ymlは署名なしビルド設定で、配布用署名キーの再利用は確認できていない。
 
 ## 未完了
-GitHub専用リポジトリ作成・ソース保存、署名資材とビルド環境の確認、macOSビルド、IPA署名、アップロード、内部テスター登録、Apple処理完了確認、iPhone実機インストール。
+署名資材とビルド環境の確認、macOSビルド、IPA署名、アップロード、内部テスター登録、Apple処理完了確認、iPhone実機インストール。
 このZIPはソースコードで、IPAやインストール可能アプリではない。
 
 ## 安全性・費用
