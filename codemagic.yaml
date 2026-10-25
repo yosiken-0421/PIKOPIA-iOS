@@ -26,8 +26,8 @@ workflows:
           from pathlib import Path
           import os
           p = Path('ios-native/project.yml')
-          new_build = int(os.environ.get('PROJECT_BUILD_NUMBER', '2'))
-          p.write_text(p.read_text().replace('CURRENT_PROJECT_VERSION: "2"', f'CURRENT_PROJECT_VERSION: "{new_build}"'))
+          new_build = int(os.environ.get('PROJECT_BUILD_NUMBER', '3'))
+          p.write_text(p.read_text().replace('CURRENT_PROJECT_VERSION: "3"', f'CURRENT_PROJECT_VERSION: "{new_build}"'))
           PY
           cd ios-native
           xcodegen generate --spec project.yml
