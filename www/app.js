@@ -33,7 +33,7 @@ function currentPlayerName(){return state.mode==='duo'&&state.player===1?state.n
 function drawIntro(){state.live=false;const g=currentInfo();$('roundInfo').textContent=`ROUND ${state.round+1} / ${state.sequence.length}`;$('scoreInfo').textContent=`${state.scores[state.player].reduce((s,x)=>s+x,0)} PTS`;
  $('playBody').innerHTML=`<div class="game-intro"><div class="big-art" style="background:${g.bg}">${g.emoji}</div><span class="intro-kicker">${escapeHtml(currentPlayerName())} ・ GAME ${state.round+1}</span><h2>${g.name}</h2><p>${g.help}<br>むずかしさ：${{easy:'やさしい',normal:'ふつう',hard:'チャレンジ'}[state.difficulty]}</p><button class="primary-btn" id="startRound">あそぶ！ ▶</button></div>`;
  $('startRound').onclick=()=>{tone(700);speak(g.name);startRound();};}
-function durationFor(id){const base={beat:16,stars:18,memory:24,sort:20,colors:18,dodge:14}[id];return Math.round(base*RULES[state.difficulty].seconds*10)/10;}
+function durationFor(id){const base={beat:16,stars:18,memory:28,sort:22,colors:21,dodge:16,balloon:38,rhythm:20,balance:28,maze:54}[id];return Math.round(base*RULES[state.difficulty].seconds*10)/10;}
 function schedule(fn,ms){const t=setTimeout(fn,ms);state.timers.push(t);return t;}
 function stopGame(){state.live=false;if(state.raf)cancelAnimationFrame(state.raf);state.raf=null;state.timers.forEach(clearTimeout);state.timers=[];state.cleanup();state.cleanup=()=>{};}
 function startRound(){stopGame();const g=currentInfo();state.duration=durationFor(g.id);state.started=performance.now();state.gameRng=makeRng(state.gameSeed+(state.round+1)*137713);state.game={id:g.id,score:0,tries:0,hits:0,misses:0,progress:0};state.live=true;
