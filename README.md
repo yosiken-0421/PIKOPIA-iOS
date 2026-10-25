@@ -97,3 +97,12 @@ npx cap open ios
 - Firebase pricing: https://firebase.google.com/docs/firestore/pricing
 - Capacitor: https://capacitorjs.com/docs
 - 日本文化庁 FAQ: https://www.bunka.go.jp/seisaku/chosakuken/kaizoku/faq.html
+
+## v0.2.0 — ミニゲーム刷新（2026-10-26）
+- 従来6種類に加え、ふうせんファクトリー／リズム・スター／まほうの天秤／星あかりの迷路を追加。**合計10種類**。
+- 反射神経だけではなく、タイミング・記憶・逆ルール・危険回避・計算・迷路の判断を楽しむ設計。
+- ランダム抽選は3/5/10種類から選択可能。3段階の難易度を保持。
+- Web本体とiOS同梱Web本体の双方を更新済み。v0.2.0 (build 3)に設定。
+- 別途組み立てたブラウザー用試作品で10ゲーム起動・迷路の道生成/クリア・3ゲーム完走/2人モード遷移を自動チェック。
+- **TestFlightは未更新**。署名済みiOS Archiveの生成とApp Store Connectへのアップロードが別途必要です。
+- 実機タッチ操作、ストア審査、オンライン同期、商用バランス調整は未完了です。
