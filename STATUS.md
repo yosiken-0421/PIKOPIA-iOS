@@ -27,7 +27,11 @@
 - ユーザーがPIKOPIA-iOSを作成。GitHub APIで非公開・管理権限・main初期コミットを確認。
 - 専用リポジトリ: https://github.com/yosiken-0421/PIKOPIA-iOS
 - mainへ44ファイルを保存し、コミット18a41eaf5aa8c77e11f2ba1dff0bbf4299bfb12fとツリーをAPIで検証。
-- Codemagicの既存連携設定はAtodeYaruBox-iOSに存在。現在の作業用Codemagicブラウザーはログイン待ち。
+- Codemagicログイン成功。Personal Accountの無料500分は500分使用済みで新規ビルド停止。課金契約・過去請求なしを確認。
+- Codemagicの既存Apple連携名はAtodeYaruBox-CI。キー内容は取得していない。
+- Codemagicにproduction配布証明書yorimichi-distribution-20261015が存在し、期限2027-10-15を確認。
+- GitHub Actionsの無料枠も2,000分中2,000分使用済み。画面に7日後リセットと表示。課金や公開設定変更はしていない。
+- 無料枠回復を待つか、ユーザーにソース・画像・BGMの公開可否を確認してから公開リポジトリの無料標準runnerを使うかが次の判断。
 - Apple Developerは証明書一覧へ移動した時点でセッション期限切れ。再ログインが必要な場合は本人操作で行う。
 - 費用枠を確認するまでActionsは手動実行のみ。
 - GitHubへのGoogle認証利用とApple再試行はユーザーが「両方許可」と明示許可済み。再確認不要。
@@ -55,3 +59,4 @@ Apple再試行とGitHubのGoogle認証への明示許可は取得済み。ユー
 費用優先でもソースの公開範囲は勝手に広げず、私有リポジトリなら含まれる無料分・支出設定を確認してから実行する。
 署名資材は内容を表示せずに対象Bundle ID・Team・期限を確認する。Secretsをコードへ書かない。
 Apple処理が終わり、内部テスターに配布されインストール可能であることを実状態で検証する。
+
