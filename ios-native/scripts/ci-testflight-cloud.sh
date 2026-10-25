@@ -25,29 +25,30 @@ export KEY_FILE
 # Never echo the key into Actions logs.
 python3 - <<'PY'
 import base64
+import binascii
 import os
 import re
 import sys
 from pathlib import Path
 
 secret = os.environ['ASC_PRIVATE_KEY'].strip()
-secret = secret.replace('\\\\r\\\\n', '\\n').replace('\\\\n', '\\n').replace('\\r', '\\n')
+secret = secret.replace('\\r\\n', '\n').replace('\\n', '\n').replace('\r', '\n')
 begin = '-----BEGIN PRIVATE KEY-----'
 end = '-----END PRIVATE KEY-----'
 start = secret.find(begin)
 finish = secret.find(end, start + len(begin))
 if start < 0 or finish < 0:
-    print('Invalid ASC_PRIVATE_KEY: missing BEGIN/END PRIVATE KEY markers. Re-copy the full AuthKey .p8 file contents into GitHub Environment secrets.', file=sys.stderr)
+    print('Invalid ASC_PRIVATE_KEY: missing BEGIN/END PRIVATE KEY markers. Re-copy the full .p8 file contents into GitHub Environment secrets.', file=sys.stderr)
     sys.exit(1)
-body = re.sub(r'\\s+', '', secret[start + len(begin):finish])
+body = re.sub(r'\s+', '', secret[start + len(begin):finish])
 try:
     der = base64.b64decode(body, validate=True)
     if not der or der[0] != 0x30:
         raise ValueError('not an ASN.1 private key')
-except (ValueError, base64.binascii.Error):
+except (ValueError, binascii.Error):
     print('Invalid ASC_PRIVATE_KEY: encoded key body is incomplete or malformed. Re-copy the full .p8 file.', file=sys.stderr)
     sys.exit(1)
-pem = begin + '\\n' + '\\n'.join(body[i:i+64] for i in range(0, len(body), 64)) + '\\n' + end + '\\n'
+pem = begin + '\n' + '\n'.join(body[i:i+64] for i in range(0, len(body), 64)) + '\n' + end + '\n'
 p = Path(os.environ['KEY_FILE'])
 p.write_text(pem)
 p.chmod(0o600)
