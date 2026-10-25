@@ -20,8 +20,42 @@ KEY_FILE="$SIGNING_DIR/AuthKey_${ASC_KEY_ID}.p8"
 cleanup() { rm -rf "$SIGNING_DIR"; }
 trap cleanup EXIT
 umask 077
-printf '%s\n' "$ASC_PRIVATE_KEY" > "$KEY_FILE"
-chmod 600 "$KEY_FILE"
+export KEY_FILE
+# Normalize PEM copied through iOS text viewers (CRLF, literal \\n or lost line breaks).
+# Never echo the key into Actions logs.
+python3 - <<'PY'
+import base64
+import os
+import re
+import sys
+from pathlib import Path
+
+secret = os.environ['ASC_PRIVATE_KEY'].strip()
+secret = secret.replace('\\\\r\\\\n', '\\n').replace('\\\\n', '\\n').replace('\\r', '\\n')
+begin = '-----BEGIN PRIVATE KEY-----'
+end = '-----END PRIVATE KEY-----'
+start = secret.find(begin)
+finish = secret.find(end, start + len(begin))
+if start < 0 or finish < 0:
+    print('Invalid ASC_PRIVATE_KEY: missing BEGIN/END PRIVATE KEY markers. Re-copy the full AuthKey .p8 file contents into GitHub Environment secrets.', file=sys.stderr)
+    sys.exit(1)
+body = re.sub(r'\\s+', '', secret[start + len(begin):finish])
+try:
+    der = base64.b64decode(body, validate=True)
+    if not der or der[0] != 0x30:
+        raise ValueError('not an ASN.1 private key')
+except (ValueError, base64.binascii.Error):
+    print('Invalid ASC_PRIVATE_KEY: encoded key body is incomplete or malformed. Re-copy the full .p8 file.', file=sys.stderr)
+    sys.exit(1)
+pem = begin + '\\n' + '\\n'.join(body[i:i+64] for i in range(0, len(body), 64)) + '\\n' + end + '\\n'
+p = Path(os.environ['KEY_FILE'])
+p.write_text(pem)
+p.chmod(0o600)
+PY
+if ! openssl pkey -in "$KEY_FILE" -noout >/dev/null 2>&1; then
+  echo 'Invalid ASC_PRIVATE_KEY: OpenSSL could not parse the key. Re-copy the .p8 contents into the GitHub secret.' >&2
+  exit 1
+fi
 
 mkdir -p .build
 export APPLE_TEAM_ID
