@@ -15,7 +15,7 @@ service cloud.firestore {
         && request.resource.data.hostName is string && request.resource.data.hostName.size() <= 14
         && request.resource.data.guestUid == null && request.resource.data.guestName == null
         && request.resource.data.hostScore == -1 && request.resource.data.guestScore == -1
-        && request.resource.data.count in [3,5,6]
+        && request.resource.data.count in [3,5,6,10]
         && request.resource.data.difficulty in ['easy','normal','hard']
         && request.resource.data.seed is int
         && request.resource.data.createdAt is int;
