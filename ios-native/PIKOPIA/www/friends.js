@@ -1,15 +1,15 @@
 /* PIKOPIA friends: actual in-game character integration. */
 (()=>{
 'use strict';
-const friendByGame={beat:'piko',stars:'moya',memory:'moya',sort:'mint',colors:'piko',dodge:'mint'};
+const friendByGame={beat:'piko',stars:'moya',memory:'moya',sort:'mint',colors:'piko',dodge:'mint',balloon:'moya',rhythm:'piko',balance:'mint',maze:'mint'};
 const labels={piko:'ピコ',mint:'ミント',moya:'モヤ'};
-const tips={beat:'真ん中でキャッチ！',stars:'星を集めてね！',memory:'順番を覚えてね♪',sort:'1から順番にタップ！',colors:'同じ色を選ぼう！',dodge:'ミントを動かして！'};
+const tips={beat:'真ん中でキャッチ！',stars:'星を集めてね！',memory:'順番を覚えてね♪',sort:'1から順番にタップ！',colors:'同じ色を選ぼう！',dodge:'ミントを動かして！',balloon:'ふくらませて止めよう！',rhythm:'光に合わせてタップ！',balance:'宝石を2つ選ぼう！',maze:'迷路を進んでゴール！'};
 function face(who,cls=''){return '<span class="friend-portrait friend-'+who+' '+cls+'" role="img" aria-label="'+labels[who]+'"></span>';}
 function id(){try{return currentInfo().id;}catch(e){return 'beat';}}
 function cards(){
 document.querySelectorAll('#gameGrid .game-card').forEach((card,i)=>{
 if(card.dataset.friendsReady)return;
-const who=['piko','moya','moya','mint','piko','mint'][i],art=card.querySelector('.game-art');
+const who=['piko','moya','moya','mint','piko','mint','moya','piko','mint','mint'][i],art=card.querySelector('.game-art');
 if(!art)return;
 const glyph=art.querySelector('.game-emoji')?.textContent||'✨';
 art.classList.add('game-art-friends');
