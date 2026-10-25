@@ -1,0 +1,30 @@
+name: PIKOPIA cloud-signed TestFlight upload
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pikopia-cloud-testflight
+  cancel-in-progress: false
+jobs:
+  cloud-testflight:
+    runs-on: macos-26
+    timeout-minutes: 40
+    environment: pikopia-testflight
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Game regression tests
+        run: node --test tests/*.test.cjs
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Archive and upload PIKOPIA using Apple cloud signing
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+          BUILD_NUMBER: ${{ github.run_number + 1000 }}
+        run: bash ios-native/scripts/ci-testflight-cloud.sh
