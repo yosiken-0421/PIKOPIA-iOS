@@ -11,7 +11,7 @@ const PARTNERS={beat:'piko',stars:'moya',memory:'moya',sort:'mint',colors:'piko'
 const STORE='pikopia_party_v030';
 const LIMIT=100000;
 const safeNum=n=>Math.max(0,Math.min(LIMIT,Number.isFinite(Number(n))?Math.floor(Number(n)):0));
-const dayKey=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');};
+const dayKey=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
 const daySeed=day=>{let n=2166136261;for(const c of 'PIKOPIA-daily-'+day)n=Math.imul(n^c.charCodeAt(0),16777619);return n>>>0;};
 const goal=()=>state.difficulty==='easy'?45:state.difficulty==='hard'?75:60;
 const read=()=>{try{const value=JSON.parse(localStorage.getItem(STORE)||'{}');return value&&typeof value==='object'&&!Array.isArray(value)?value:{};}catch{return {};}};
@@ -28,14 +28,14 @@ function renderBook(){
 function ensureDailyButton(){
  const home=document.querySelector('.mode-stack');if(!home||document.getElementById('dailyBtn'))return;
  const btn=document.createElement('button');btn.id='dailyBtn';btn.className='mode-card party-daily';
- btn.innerHTML='<span class="mode-glyph">🌠</span><span class="mode-text"><small>DAILY CHALLENGE</small><strong>本日のチャレンジ</strong><span>今日決まった5本で自己ベストを更新！</span></span><span class="chevron">↗</span>';
+ btn.innerHTML='<span class="mode-glyph">🌠</span><span class="mode-text"><small>DAILY CHALLENGE</small><strong>本日のチャレンジ</strong><span>日本時間で同じ5本！自己ベストを更新！</span></span><span class="chevron">↗</span>';
  btn.addEventListener('click',()=>startSession('daily'));home.appendChild(btn);
 }
 function missionIntro(){
  const el=document.querySelector('#playBody .game-intro');if(!el||el.querySelector('.party-mission'))return;
  const who=PARTNERS[currentInfo()?.id]||'piko',hero=CHARACTERS[who],mission=document.createElement('div');
  mission.className='party-mission';
- mission.innerHTML='<span>⭐ 今日の小さなミッション</span><strong>'+goal()+'点以上でスターを1個GET!</strong><small>'+hero.icon+' '+hero.name+'の能力：「'+hero.power+'」</small>';
+ mission.innerHTML='<span>⭐ ラウンドミッション</span><strong>'+goal()+'点以上でスターを1個GET!</strong><small>'+hero.icon+' '+hero.name+'の能力：「'+hero.power+'」</small>';
  el.querySelector('#startRound')?.before(mission);
 }
 function abilityHud(){
