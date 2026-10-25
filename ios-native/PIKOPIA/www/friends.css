@@ -1,0 +1,43 @@
+/* Portrait crops of the existing original pictorial assets, not replacement emojis. */
+.friend-portrait{display:inline-block;flex:none;overflow:hidden;background-image:url('./assets/pikopia-world.webp');background-repeat:no-repeat;background-size:238% 238%;border-radius:50%;background-color:#d1c9f6;box-shadow:0 6px 16px #35246435,0 0 0 3px #fff;vertical-align:middle;isolation:isolate}
+.friend-piko{background-position:57% 29%;background-color:#ffe6a4}
+.friend-mint{background-position:10% 72%;background-color:#bbf3e6}
+.friend-moya{background-position:96% 94%;background-color:#dec6ff}
+.mascot-wrap:has(.hero-friends){top:113px;right:5px;width:186px;height:205px;transform:none;animation:none;filter:none}
+.hero-friends{position:relative;width:100%;height:170px}
+.hero-friends .friend-portrait{position:absolute;animation:friend-bob 3s ease-in-out infinite alternate}
+.hero-piko{width:133px;height:133px;left:28px;top:2px;z-index:3}
+.hero-mint{width:82px;height:82px;left:-5px;top:96px;z-index:2;animation-delay:-1s!important}
+.hero-moya{width:84px;height:84px;right:-4px;top:95px;z-index:2;animation-delay:-1.8s!important}
+.mascot-wrap:has(.hero-friends) .mascot-label{left:44px;bottom:1px;font-size:11px}
+@keyframes friend-bob{0%{transform:translateY(0) rotate(-4deg)}100%{transform:translateY(-9px) rotate(4deg)}}
+.game-art-friends{background:linear-gradient(140deg,#a5cbff,#e5bbf8)!important;height:125px}
+.game-art-friends .card-friend{width:112px;height:112px;animation:friend-bob 3s infinite alternate}
+.game-art-friends .game-medallion{position:absolute;right:9px;top:9px;z-index:2;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;font-size:22px;background:#fff;border:2px solid #fffc;box-shadow:0 4px 10px #3324553b}
+.game-art-friends .game-friend-name{position:absolute;bottom:7px;right:7px;z-index:2;border-radius:22px;background:#fffdf4ed;color:#594589;padding:3px 8px;font-size:10px;font-weight:900}
+.game-card:nth-child(2n) .game-art-friends{background:linear-gradient(145deg,#fbc9ec,#ceb4ff)!important}
+.game-card:nth-child(3n) .game-art-friends{background:linear-gradient(145deg,#fff1a3,#b1e7d9)!important}
+.big-art-friends{width:230px;height:223px;overflow:visible;transform:none!important;border-radius:50%;background:radial-gradient(circle,#e6d8ff,#c4ccff)!important;position:relative;box-shadow:0 12px 30px #543cab24;flex:none}
+.big-art-friends .intro-friend{width:194px;height:194px;animation:friend-bob 2.4s infinite alternate}
+.big-art-friends .intro-glitter{position:absolute;right:-18px;top:-14px;font-size:25px;color:#f4b83e;transform:rotate(17deg)}
+.friend-pair{display:flex;align-items:center;justify-content:center;gap:5px}.friend-pair .intro-friend{width:115px;height:115px}
+.scene-with-friends{background-image:radial-gradient(circle at 13% 10%,#ffffff63,transparent 40%),linear-gradient(160deg,#9781df,#5b5ba1)!important}
+.scene-with-friends:before{content:'✦ ✧ ✦';position:absolute;top:10px;left:15px;right:15px;pointer-events:none;font-size:18px;color:#fff9;letter-spacing:15px;z-index:0}
+.scene-with-friends .game-friend-companion{position:absolute;top:7px;right:7px;z-index:4;display:flex;align-items:center;gap:4px;pointer-events:none}
+.scene-with-friends .playing-friend{width:62px;height:62px;animation:friend-bob 2.7s infinite alternate}
+.scene-with-friends .friend-says{max-width:99px;font-weight:900;font-size:10px;line-height:1.3;border:2px solid #fff;border-radius:16px;background:#fffdf3;color:#60488b;padding:6px 7px}
+.scene-stars .star-grid,.scene-memory .memory-grid,.scene-sort .sort-grid{top:67px}
+.scene-colors .color-prompt{top:79px}.scene-colors .color-options{top:147px}
+.scene-beat .beat-track{top:53%}.scene-beat .beat-center{top:55%}.scene-beat .beat-orb{top:55%}
+.scene-dodge .game-friend-companion{display:none}
+.scene-dodge .dodge-player.dodge-friend-player{height:80px;width:30%;bottom:10px;font-size:initial;filter:drop-shadow(0 5px 10px #0004)}
+.scene-dodge .dodge-mint{height:74px;width:74px;box-shadow:0 0 0 3px #fff8,0 6px 16px #0004;animation:friend-bob 1.3s infinite alternate}
+.result-screen .result-friends{font-size:initial;width:100%;animation:none}
+.celebrate-friends{height:162px;position:relative;max-width:320px;margin:0 auto}
+.celebrate-friends .friend-portrait{position:absolute;animation:friend-bob 2s infinite alternate}
+.celebrate-piko{width:147px;height:147px;left:calc(50% - 73px);top:1px;z-index:3}
+.celebrate-mint{width:100px;height:100px;left:10px;top:55px;z-index:2;animation-delay:-1s!important}
+.celebrate-moya{width:100px;height:100px;right:10px;top:55px;z-index:2;animation-delay:-1.5s!important}
+.celebrate-stars{font-size:28px;margin-top:3px;letter-spacing:10px}
+@media(max-width:360px){.hero-piko{width:114px;height:114px}.hero-mint,.hero-moya{width:70px;height:70px}.game-art-friends .card-friend{width:95px;height:95px}.scene-with-friends .playing-friend{width:49px;height:49px}.scene-with-friends .friend-says{font-size:9px;max-width:79px}}
+@media(prefers-reduced-motion:reduce){.friend-portrait,.game-art-friends .card-friend{animation:none!important}}
