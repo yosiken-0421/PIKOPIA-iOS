@@ -39,7 +39,7 @@ $('balanceReset').onclick=()=>{if(locked||!state.live)return;selected=[];draw();
 mountBeat=function(){
 const scene=$('scene');scene.innerHTML='<div class="beat-track"></div><div class="beat-center"></div><div class="beat-orb" id="beatOrb">✦</div><div class="arcade-combo" id="beatCombo">0 COMBO</div><button class="beat-tap" id="beatTap">ジャスト！ ✨</button>';
 let pos=0,combo=0;state.game.tick=e=>{pos=50+42*Math.sin(e*(2.8+state.game.tries*.48)*RULES[state.difficulty].pace);$('beatOrb').style.left=pos+'%';};
-$('beatTap').onclick=()=>{if(!state.live)return;const d=Math.abs(pos-50),perfect=d<5,good=d<13;combo=good?combo+1:0;state.game.score+=(perfect?18:good?13:d<22?8:2)+(perfect?Math.min(5,combo*2):good?Math.min(5,combo):0);state.game.tries++;$('beatCombo').textContent=combo+' COMBO';arcadeHit(perfect?'PERFECT!':good?'GOOD!':'もう少し！',good?830:320);setStats('タップ '+state.game.tries+'/5');if(state.game.tries===5)schedule(endRound,450);};
+$('beatTap').onclick=()=>{if(!state.live||state.game.tries>=5)return;const d=Math.abs(pos-50),perfect=d<5,good=d<13;combo=good?combo+1:0;state.game.score+=(perfect?18:good?13:d<22?8:2)+(perfect?Math.min(5,combo*2):good?Math.min(5,combo):0);state.game.tries++;$('beatCombo').textContent=combo+' COMBO';arcadeHit(perfect?'PERFECT!':good?'GOOD!':'もう少し！',good?830:320);setStats('タップ '+state.game.tries+'/5');if(state.game.tries===5)schedule(endRound,450);};
 };
 mountStars=function(){
 const scene=$('scene');scene.innerHTML='<div class="arcade-title">🌟 金色の星を追いかけよう（💥はタップしないで！）</div><div class="star-grid" id="starGrid"></div><div class="arcade-combo" id="starCombo">COMBO 0</div>';
